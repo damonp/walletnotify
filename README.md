@@ -1,4 +1,4 @@
-walletnotify
+WalletNotify
 ============
 
 
@@ -6,6 +6,14 @@ walletnotify
 bitcoind provides a configuration parameter called [*walletnotify*](https://en.bitcoin.it/wiki/Running_Bitcoin) that accepts a script as its parameter.  When the wallet receives a transaction for a local address it hits the script configured, passing the txid incoming.  
 
 The *walletnotify* script is hit twice for each transaction; when it first appears on the network (0 confirmations) and after the first confirmation.  It is called for both receiving and sending transactions.
+
+**walletnotify.php** is a self-contained PHP script for processing *walletnotify* calls.  Use as is or customize for your own needs.
+
+### Features
+- Processes bitcoind *walletnotify* calls and inserts the transaction into a database (MySQL or SQLite).
+- Sends email and SMS notifications on transactions affecting local BTC addresses.
+- Provides a simple interface for chaining other processes.
+
 
 ### Usage
 - Receive SMS or email update anytime funds are sent or received.

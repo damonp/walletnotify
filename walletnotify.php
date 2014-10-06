@@ -61,28 +61,47 @@ CREATE TABLE `walletnotify` (
 
  */
 
+   //- CONFIGS
    error_reporting('E_ALL ^ E_NOTICE ^ E_DEPRECATED');
+   //define('WN_RPC_ACCT', 'fwd');
 
    define('WN_GLOBAL_TIMESTAMP', time());
-   define('WN_RPC_ACCT', 'fwd');
 
+   //- set for local bitcoind access or remote RPC service like rpc.blockchain.info
    define('WN_RPC_USER', '');
    define('WN_RPC_PASS', '');
    define('WN_RPC_HOST', '');
    define('WN_RPC_PORT', '');
-   define('WN_SMS_ADMIN', '#####@carrier.com');
+
+   //- Email to send notifications to
    define('WN_EMAIL_ADMIN', '');
+
+   //- Email address notifications should come from
    define('WN_EMAIL_FROM', 'WN.BTC.Bot <walletnotify.bot@domain.com>');
+
+   //- Email to SMS gateway of mobile carrier like:
+   //- #@vtext.com, #@txt.att.net, etc.
+   //- Sends short SMS notification.
+   define('WN_SMS_ADMIN', '#####@carrier.com');
+
+   //- DB SELECT
+   //- use one of these: PDO:sqlite or PDO:mysql
+
+   //- SQLite
+   //$db = new PDO('sqlite: ./walletnotify.sqlite3');
+   //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+   //- OR
+   //- MySQL
+   $dsn = 'mysql:dbname=walletnotify;host=localhost';
+   $db = new PDO($dsn, 'root', '');
+
+   //- END DB SELECT
+
+   //- END CONFIGS
 
    if(2 == $argc)    {
       $api = new CoindRPC();
-
-      //- use one of these: PDO:sqlite or PDO:mysql
-      //$db = new PDO('sqlite: ./walletnotify.sqlite3');
-      //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      $dsn = 'mysql:dbname=walletnotify;host=localhost';
-      $db = new PDO($dsn, 'root', '');
 
       $helper = new Helper($db, $api);
 
@@ -146,7 +165,7 @@ CREATE TABLE `walletnotify` (
 
 
 /*
-      =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =
+   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =   =
  */
 
 
@@ -353,6 +372,11 @@ class Bitcoin
    }
 }
 
+/*
+
+   Address History Interface Class
+
+ */
 class AddressHistory
 {
 
@@ -395,6 +419,11 @@ class AddressHistory
    }
 }
 
+/*
+
+   Transaction Reference Interface Class
+
+ */
 class TransRef
 {
 
@@ -421,14 +450,17 @@ class TransRef
 }
 
 
+/*
+
+   CoindRPC - JsonRPC Class to talk to bitcoind
+
+ */
 class CoindRPC extends Bitcoin
 {
 
    public function __construct()
    {
-
       return parent::__construct(WN_RPC_USER, WN_RPC_PASS, WN_RPC_HOST, WN_RPC_PORT);
-
    }
 
    public function __call($method, $params)
@@ -466,7 +498,9 @@ class CoindRPC extends Bitcoin
             $address_info = $this->validateaddress($address);
 
             if($address_info['isvalid'] == 1 && $address_info['ismine'] == 1)   {
-               $history = $this->listtransactions(WN_RPC_ACCT);
+               //- if only listening to one BTC account
+               //$history = $this->listtransactions(WN_RPC_ACCT);
+               $history = $this->listtransactions();
 
                $txns = array();
                $final_balance = $balance = 0;
@@ -536,7 +570,11 @@ class CoindRPC extends Bitcoin
    }
 }
 
+/*
 
+   Helper class
+
+ */
 
 class Helper
 {
