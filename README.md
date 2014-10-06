@@ -34,7 +34,7 @@ walletnotify=/FULL/PATH/TO/php -f /FULL/PATH/TO/walletnotify.php %s
 5. Execute manually and pass in any recent txid.
 
 	```
-php -f walletnotify.p <txid>
+php -f walletnotify.php <txid>
 	```
 6. Check db to verify it was inserted.
 7. If inserted correctly, Restart bitcoind.  If not, DEBUG AND TEST!!
