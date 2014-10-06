@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>WalletNotify</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+body {font-family: verdana;font-size: 14px;-webkit-text-size-adjust: none;margin: 0;padding: 0;background: #eee;width: 100% !important;}
+#main {margin:1em auto;padding:1em;width: 450px;text-align: left;border: 1px solid #bbb;background-color: #fff;}
+.row    {display:table-row;padding:0.25em;}
+.cell   {display:table-cell;padding:0.25em;}
+.head   {font-weight:bold;width:100px;}
+.header {background-color:#dfdfdf;font-weight: bold;}
+.value  {width:325px;}
+.footer {width:100%;padding:2em 0 0.5em 0;color:#333;font-size:0.75em;}
+.footer a {color:#666;text-decoration:none;}
+.code   {font-family: monospace;}
+.debug  {margin: 2em 0 1em 0;}
+.even   {background-color:#efefef;}
+h4,h5   {margin:1em auto;}
+</style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" bgcolor="#eee">
+<div id="main">
+<h4>WalletNotify {hostname}</h4>
+<h5 class="">{timestamp}</h5>
+<div id="table">
+  <div class="row even">
+    <div class="cell head">TxID</div>
+    <div class="cell value"><a href="https://blockchain.info/tx/{txid}">{txid}</a></div>
+  </div>
+  <div class="row header">
+    <div class="cell head">TotAmt</div>
+    <div class="cell value">{tot_amt} BTC</div>
+  </div>
+  <div class="row even">
+    <div class="cell head">TotFee</div>
+    <div class="cell value">{tot_fee} BTC</div>
+  </div>
+  <div class="row">
+    <div class="cell head">Confirms</div>
+    <div class="cell value">{confirmations}</div>
+  </div>
+  <div class="row even">
+    <div class="cell head">Comment</div>
+    <div class="cell value">{comment}</div>
+  </div>
+  <div class="row">
+    <div class="cell head">Blocktime</div>
+    <div class="cell value">{blocktime}</div>
+  </div>
+  <div class="row even">
+    <div class="cell head">Account</div>
+    <div class="cell value">{account}</div>
+  </div>
+  <div class="row">
+    <div class="cell head">Address</div>
+    <div class="cell value"><a href="https://blockchain.info/address/{address}">{address}</a></div>
+  </div>
+  <div class="row even">
+    <div class="cell head">Category</div>
+    <div class="cell value">{category}</div>
+  </div>
+  <div class="row">
+    <div class="cell head">Amount0</div>
+    <div class="cell value">{amount}</div>
+  </div>
+  <div class="row even">
+    <div class="cell head">Fee0</div>
+    <div class="cell value">{fee}</div>
+  </div>
+</div>
+<div class="footer">
+Thanks<br />
+The BTC bots @ <a href="http://simplebtcpay.com">simplebtcpay.com</a>
+</div>
+</div>
+</body>
+</html>
