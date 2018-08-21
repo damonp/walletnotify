@@ -27,15 +27,15 @@ The *walletnotify* script is hit twice for each transaction; when it first appea
 2. Create db and tables using the SQL create statements a the top of walletnotify.php.
 3. Add the following to your bitcoin.conf:
 
-	```
+	`
 walletnotify=/FULL/PATH/TO/php -f /FULL/PATH/TO/walletnotify.php %s
-	```
+	`
 4. TEST!!!!
 5. Execute manually and pass in any recent txid.
 
-	```
+	`
 php -f walletnotify.php <txid>
-	```
+	`
 6. Check db to verify it was inserted.
 7. If inserted correctly, Restart bitcoind.  If not, DEBUG AND TEST!!
 8. Send a few satoshi to a local address to verify bitcoind is able to call the script.

@@ -205,7 +205,7 @@ THE SOFTWARE.
 $bitcoin = new Bitcoin('username','password');
 
 // Optionally, you can specify a host and port.
-$bitcoin = new Bitcoin('username','password','host','port');
+$bitcoin = new Bitcoin('username','password','host','28191');
 // Defaults are:
 //  host = localhost
 //  port = 8332
@@ -260,7 +260,7 @@ class Bitcoin
     * @param string $proto
     * @param string $url
     */
-   function __construct($username, $password, $host = 'localhost', $port = 8332, $url = null) {
+   function __construct($username, $password, $host = 'localhost', $port = 28191, $url = null) {
          $this->username      = $username;
          $this->password      = $password;
          $this->host          = $host;
